@@ -28,8 +28,8 @@ function AddCheck() {
     };
 
     return (
-        <div>
-            <Row style={{ marginTop: "3rem" }}>
+        <div style={{background:"white"}}>
+            <Row style={{ marginTop: "" }}>
                 <Col span={20}>
                     <h1>CheckIns</h1>
                     <div>
@@ -45,10 +45,10 @@ function AddCheck() {
             <Modal visible={visible} onCancel={handleCloseForm} footer={null} centered>
                 <h3>New CheckIn</h3>
                 <Form onFinish={handleSubmit}>
-                    <Form.Item name="Title" label="Title" rules={[{ required: true }]}>
+                    <Form.Item name="Title"  rules={[{ required: true }]}>
                         <Input placeholder="Check In Title" />
                     </Form.Item>
-                    <Form.Item name="URL" label="URL" rules={[{ required: true }]}>
+                    <Form.Item name="URL"  rules={[{ required: true }]}>
                         <Input placeholder="Image URL" />
                     </Form.Item>
                     <Form.Item>
