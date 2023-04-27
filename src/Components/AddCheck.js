@@ -29,8 +29,8 @@ function AddCheck() {
 
     return (
         <div style={{background:"white"}}>
-            <Row style={{ marginTop: "" }}>
-                <Col span={20}>
+            <Row >
+                <Col span={18} style={{marginLeft:'2rem'}}>
                     <h1>CheckIns</h1>
                     <div>
                         <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</Text>

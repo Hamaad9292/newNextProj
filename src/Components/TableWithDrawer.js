@@ -3,40 +3,48 @@ import { Table, Drawer } from 'antd';
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Title',
+    dataIndex: 'Title',
+    key: 'Title',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Status',
+    dataIndex: 'Status',
+    key: 'Status',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'Owner',
+    dataIndex: 'Owner',
+    key: 'Owner',
+  },
+  {
+    title: 'Created',
+    dataIndex: 'Created',
+    key: 'Created',
   },
 ];
 
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    Title: 'John Brown',
+    Owner: "john Down",
+    Status: 'Checked In',
+    Created: '12-11-2022',
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
+    Title: 'John Brown',
+    Owner: "john Down",
+    Status: 'Checked In',
+    Created: '12-11-2022',
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
+    Title: 'John Brown',
+    Owner: "john Down",
+    Status: 'Checked In',
+    Created: '12-11-2022',
   },
 ];
 
@@ -72,9 +80,10 @@ function TableWithDrawer() {
       >
         {selectedRow && (
           <div>
-            <p>Name: {selectedRow.name}</p>
-            <p>Age: {selectedRow.age}</p>
-            <p>Address: {selectedRow.address}</p>
+            <p>Title: {selectedRow.Title}</p>
+            <p>Status: {selectedRow.Status}</p>
+            <p>Owner: {selectedRow.Owner}</p>
+            <p>Created At: {selectedRow.Created}</p>
           </div>
         )}
       </Drawer>
