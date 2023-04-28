@@ -74,7 +74,8 @@ function TableWithDrawer() {
         }}
       />
       <Drawer
-        title="Detail"
+      width={300}
+        title="Details"
         visible={isDrawerVisible}
         onClose={handleDrawerClose}
       >

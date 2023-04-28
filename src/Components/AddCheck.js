@@ -37,7 +37,7 @@ function AddCheck() {
                     </div>
                 </Col>
                 <Col span={4}>
-                    <Button type="default" onClick={handleOpenForm} style={{ background: 'black', color: 'white', marginTop: '2rem' }}>
+                    <Button type="default" onClick={handleOpenForm} style={{ background: 'black', color: 'white', marginTop: '2rem',marginLeft:'3rem' }}>
                         Add CheckIn
                     </Button>
                 </Col>

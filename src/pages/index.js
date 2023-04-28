@@ -1,5 +1,5 @@
 import React from 'react';
-import New from './New';
+import New from './main/index';
 
 
 function index() {
