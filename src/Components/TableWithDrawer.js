@@ -1,65 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Drawer } from 'antd';
 
-const columns = [
-  {
-    title: 'Title',
-    dataIndex: 'Title',
-    key: 'Title',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'Status',
-    key: 'Status',
-  },
-  {
-    title: 'Owner',
-    dataIndex: 'Owner',
-    key: 'Owner',
-  },
-  {
-    title: 'Created',
-    dataIndex: 'Created',
-    key: 'Created',
-  },
-];
-
-const data = [
-  {
-    key: '1',
-    Title: 'John Brown',
-    Owner: "john Down",
-    Status: 'Checked In',
-    Created: '12-11-2022',
-  },
-  {
-    key: '2',
-    Title: 'John Brown',
-    Owner: "john Down",
-    Status: 'Checked In',
-    Created: '12-11-2022',
-  },
-  {
-    key: '3',
-    Title: 'John Brown',
-    Owner: "john Down",
-    Status: 'Checked In',
-    Created: '12-11-2022',
-  },
-];
-
 function TableWithDrawer() {
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false); // state for Drawer visibility
-  const [selectedRow, setSelectedRow] = useState(null); // state for selected row
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetch('https://profound-marmot-29.hasura.app/v1/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: `
+          query {
+            comments {
+              id
+              imageUrl
+            }
+          }
+        `
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch comments');
+        }
+        return res.json();
+      })
+      .then(data => setComments(data.data.comments))
+      .catch(error => console.error(error));
+  }, []);
+  
+
+  const columns = [
+    {
+      title: 'Title',
+      dataIndex: 'imageUrl',
+      key: 'imageUrl',
+      render: (text, record) => (
+        <span>{record.title}</span>
+      )
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Owner',
+      dataIndex: 'owner',
+      key: 'owner',
+    },
+    {
+      title: 'Created',
+      dataIndex: 'created',
+      key: 'created',
+    },
+  ];
+  
+
+  const data = comments.map(comment => ({
+    key: comment.id,
+    id: comment.id,
+    title: comment.title,
+    owner: comment.owner,
+    status: comment.status,
+    created: comment.created
+  }));
 
   const handleRowClick = (record) => {
-    setSelectedRow(record); // set the selected row
-    setIsDrawerVisible(true); // open the Drawer
+    setSelectedRow(record);
+    setIsDrawerVisible(true);
   }
 
   const handleDrawerClose = () => {
-    setIsDrawerVisible(false); // close the Drawer
-    setSelectedRow(null); // reset the selected row
+    setIsDrawerVisible(false);
+    setSelectedRow(null);
   }
 
   return (
@@ -74,17 +90,15 @@ function TableWithDrawer() {
         }}
       />
       <Drawer
-      width={300}
+        width={300}
         title="Details"
-        visible={isDrawerVisible}
+        open={isDrawerVisible}
         onClose={handleDrawerClose}
       >
         {selectedRow && (
           <div>
-            <p>Title: {selectedRow.Title}</p>
-            <p>Status: {selectedRow.Status}</p>
-            <p>Owner: {selectedRow.Owner}</p>
-            <p>Created At: {selectedRow.Created}</p>
+            <p>Title: {selectedRow.title}</p>
+            <img src={selectedRow.imageUrl} alt="Image Description" width={300} height={200}/>
           </div>
         )}
       </Drawer>
@@ -93,3 +107,4 @@ function TableWithDrawer() {
 }
 
 export default TableWithDrawer;
+
